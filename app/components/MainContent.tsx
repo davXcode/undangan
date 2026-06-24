@@ -543,7 +543,7 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
         </div>
       </div>
       {/* Audio Element */}
-      <audio ref={audioRef} src="/music/wedding.mpeg" preload="auto" />
+      <audio ref={audioRef} src="/music/wedding.mp3" preload="auto" />
     </div>
   );
 };

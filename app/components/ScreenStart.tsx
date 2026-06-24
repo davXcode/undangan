@@ -35,14 +35,9 @@ const ScreenStart = ({ onMusicStart, onStarted }: ScreenStartProps) => {
   // Called directly from a user gesture — audio unlock is guaranteed
   const handleStart = () => {
     if (started) return;
-    // Play-then-pause in gesture context to unlock audio for all future calls
-    keyboardRef.current
-      ?.play()
-      .then(() => {
-        keyboardRef.current?.pause();
-        keyboardRef.current!.currentTime = 0;
-      })
-      .catch(() => {});
+    // Start playing synchronously in gesture context — browser allows this on all platforms
+    shouldPlayRef.current = true;
+    keyboardRef.current?.play().catch(() => {});
     setStarted(true);
     onStarted?.();
   };
