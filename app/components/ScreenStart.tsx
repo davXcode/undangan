@@ -1,24 +1,25 @@
-"use client";
+'use client';
 
-import { config } from "@/lib/config";
-import { useEffect, useRef, useState } from "react";
-import { TypeAnimation } from "react-type-animation";
+import { config } from '@/lib/config';
+import { useEffect, useRef, useState } from 'react';
+import { TypeAnimation } from 'react-type-animation';
 
 type ScreenStartProps = {
   onMusicStart?: () => void;
+  onStarted?: () => void;
 };
 
-const ScreenStart = ({ onMusicStart }: ScreenStartProps) => {
+const ScreenStart = ({ onMusicStart, onStarted }: ScreenStartProps) => {
   const [showScreenStart, setShowScreenStart] = useState(true);
+  const [started, setStarted] = useState(false);
   const [videoVisible, setVideoVisible] = useState(false);
   const [videoOpacity, setVideoOpacity] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
   const keyboardRef = useRef<HTMLAudioElement>(null);
-  const unlockedRef = useRef(false);
   const shouldPlayRef = useRef(false);
 
   const tryPlay = () => {
-    if (unlockedRef.current && shouldPlayRef.current) {
+    if (shouldPlayRef.current) {
       keyboardRef.current?.play().catch(() => {});
     }
   };
@@ -31,22 +32,24 @@ const ScreenStart = ({ onMusicStart }: ScreenStartProps) => {
     }
   };
 
-  const unlockAudio = () => {
-    if (unlockedRef.current) return;
-    unlockedRef.current = true;
-    tryPlay();
+  // Called directly from a user gesture — audio unlock is guaranteed
+  const handleStart = () => {
+    if (started) return;
+    // Play-then-pause in gesture context to unlock audio for all future calls
+    keyboardRef.current
+      ?.play()
+      .then(() => {
+        keyboardRef.current?.pause();
+        keyboardRef.current!.currentTime = 0;
+      })
+      .catch(() => {});
+    setStarted(true);
+    onStarted?.();
   };
 
   useEffect(() => {
-    document.addEventListener("click", unlockAudio, { once: true });
-    document.addEventListener("touchstart", unlockAudio, { once: true });
-    return () => {
-      document.removeEventListener("click", unlockAudio);
-      document.removeEventListener("touchstart", unlockAudio);
-    };
-  }, []);
+    if (!started) return;
 
-  useEffect(() => {
     const showVideoTimer = setTimeout(() => {
       setVideoVisible(true);
       setTimeout(() => setVideoOpacity(true), 50);
@@ -69,14 +72,14 @@ const ScreenStart = ({ onMusicStart }: ScreenStartProps) => {
       clearTimeout(fadeOutTimer);
       clearTimeout(removeTimer);
     };
-  }, []);
+  }, [started]);
 
   if (!showScreenStart) return null;
 
   return (
     <div
       className={`fixed inset-0 z-50 transition-opacity duration-[1200ms] ${
-        fadeOut ? "opacity-0" : "opacity-100"
+        fadeOut ? 'opacity-0' : 'opacity-100'
       }`}
     >
       {/* Cover dengan blackout overlay */}
@@ -89,37 +92,60 @@ const ScreenStart = ({ onMusicStart }: ScreenStartProps) => {
         <div className="absolute inset-0 bg-black/65" />
       </div>
 
-      {/* Teks typing di tengah */}
-      <div className="relative z-10 flex flex-col justify-center items-center min-h-screen text-white">
-        <TypeAnimation
-          sequence={[
-            () => { shouldPlayRef.current = true; tryPlay(); },
-            "THE WEDDING OF",
-            () => { stopKeyboard(); },
-            2000,
-            () => { shouldPlayRef.current = true; tryPlay(); },
-            config.coupleNames.toUpperCase(),
-            () => { stopKeyboard(); onMusicStart?.(); },
-          ]}
-          wrapper="span"
-          speed={20}
-          style={{ fontSize: "2em", display: "inline-block" }}
-          className="font-legan text-sm"
-          repeat={0}
-        />
-      </div>
+      {/* Tap to start — tampil sebelum animasi dimulai */}
+      {!started && (
+        <button
+          onClick={handleStart}
+          className="absolute inset-0 z-30 flex flex-col items-center justify-center cursor-pointer"
+        >
+          <span className="text-white font-legan text-sm animate-pulse">
+            Tap to Open
+          </span>
+        </button>
+      )}
+
+      {/* Teks typing — hanya muncul setelah tap */}
+      {started && (
+        <div className="relative z-10 flex flex-col justify-center items-center min-h-screen text-white">
+          <TypeAnimation
+            sequence={[
+              () => {
+                shouldPlayRef.current = true;
+                tryPlay();
+              },
+              'THE WEDDING OF',
+              () => {
+                stopKeyboard();
+              },
+              2000,
+              () => {
+                shouldPlayRef.current = true;
+                tryPlay();
+              },
+              config.coupleNames.toUpperCase(),
+              () => {
+                stopKeyboard();
+                onMusicStart?.();
+              },
+            ]}
+            wrapper="span"
+            speed={20}
+            style={{ fontSize: '2em', display: 'inline-block' }}
+            className="font-legan text-sm"
+            repeat={0}
+          />
+        </div>
+      )}
+
       <audio ref={keyboardRef} src="/music/keyboard.mp3" loop preload="auto" />
 
       {/* Video cinematic fade in */}
       {videoVisible && (
         <div
           className={`absolute inset-0 z-20 transition-opacity duration-[2500ms] ${
-            videoOpacity ? "opacity-100" : "opacity-0"
+            videoOpacity ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          {/* Letterbox cinematic bars */}
-          {/* <div className="absolute top-0 left-0 right-0 h-[10vh] bg-black z-30" />
-          <div className="absolute bottom-0 left-0 right-0 h-[10vh] bg-black z-30" /> */}
           <video
             autoPlay
             muted
