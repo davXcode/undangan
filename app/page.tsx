@@ -17,17 +17,14 @@ export default function Home() {
         if (weddingAudioRef.current) weddingAudioRef.current.currentTime = 0;
       })
       .catch(() => {});
+    setTimeout(() => weddingAudioRef.current?.play().catch(() => {}), 6000);
     setTimeout(() => setShowContent(true), 7000);
-  };
-
-  const handleMusicStart = () => {
-    weddingAudioRef.current?.play().catch(() => {});
   };
 
   return (
     <div className="h-screen">
       <audio ref={weddingAudioRef} src="/music/wedding.mp3" preload="auto" />
-      <ScreenStart onMusicStart={handleMusicStart} onStarted={handleStarted} />
+      <ScreenStart onStarted={handleStarted} />
       {showContent && <MainContent />}
     </div>
   );
