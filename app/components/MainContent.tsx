@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useRef } from "react";
-import { IoIosArrowUp } from "react-icons/io";
-import { FaInstagram } from "react-icons/fa";
-import Link from "next/link";
-import { useInView } from "react-intersection-observer";
-import CountdownTimer from "./Countdown";
-import Form from "./Form";
-import WishesList from "./WishesList";
-import { config } from "@/lib/config";
+import { useState, useEffect, useRef } from 'react';
+import { IoIosArrowUp } from 'react-icons/io';
+import { FaInstagram } from 'react-icons/fa';
+import Link from 'next/link';
+import { useInView } from 'react-intersection-observer';
+import CountdownTimer from './Countdown';
+import Form from './Form';
+import WishesList from './WishesList';
+import { config } from '@/lib/config';
 
 type WeddingScreenProps = {
   name?: string;
@@ -16,7 +16,7 @@ type WeddingScreenProps = {
 };
 
 const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
-  const [fadeClass, setFadeClass] = useState("opacity-0");
+  const [fadeClass, setFadeClass] = useState('opacity-0');
   const [isOpen, setIsOpen] = useState(false);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -25,7 +25,7 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
   // Untuk fade-in pertama kali
   useEffect(() => {
     const timer = setTimeout(() => {
-      setFadeClass("opacity-100");
+      setFadeClass('opacity-100');
     }, 500);
 
     return () => clearTimeout(timer);
@@ -91,12 +91,12 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
   });
 
   useEffect(() => {
-    const video = document.querySelector("iframe");
+    const video = document.querySelector('iframe');
     if (video) {
       if (isSlide8InView) {
-        video.src += "&autoplay=1";
+        video.src += '&autoplay=1';
       } else {
-        video.src = video.src.replace("&autoplay=1", "");
+        video.src = video.src.replace('&autoplay=1', '');
       }
     }
   }, [isSlide8InView]);
@@ -119,8 +119,8 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
         className="md:flex justify-center hidden items-end pb-12 w-2/3 h-1/2 md:h-full"
         style={{
           backgroundImage: `url(/foto_1_samping.jpg)`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
         <div className="bottom-10 left-20 font-ovo text-lg text-white tracking-[5px] uppercase">
@@ -151,7 +151,7 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
               loop
               playsInline
               className="absolute inset-0 w-full h-full object-cover z-10"
-              style={{ objectPosition: "47% center" }}
+              style={{ objectPosition: '47% center' }}
               src="/video-open.mp4"
             />
             {/* Dark overlay 40% */}
@@ -161,7 +161,7 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
               <div className="gap-y-4 md:gap-y-6 flex flex-col items-center mt-16">
                 <h5
                   className={`text-lg font-legan text-white uppercase tracking-widest fadeMain2 ${
-                    isMain2InView ? "active" : ""
+                    isMain2InView ? 'active' : ''
                   } `}
                   ref={main2Ref}
                 >
@@ -169,7 +169,7 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
                 </h5>
                 <h1
                   className={`text-4xl md:text-5xl font-ovo text-white uppercase fadeMain ${
-                    isMainInView ? "active" : ""
+                    isMainInView ? 'active' : ''
                   } `}
                   ref={mainRef}
                 >
@@ -177,21 +177,21 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
                 </h1>
                 <h5
                   className={`text-lg font-legan text-white uppercase tracking-wide fadeMain2 ${
-                    isMain2InView ? "active" : ""
+                    isMain2InView ? 'active' : ''
                   } `}
                   ref={main2Ref}
                 >
-                  {new Date(config.eventDate).toLocaleDateString("en-US", {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
+                  {new Date(config.eventDate).toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
                   })}
                 </h5>
               </div>
               <div className="absolute bottom-16 left-0 right-0 text-center">
                 <p className="text-xl uppercase font-xs tracking-widest text-white">
-                  {name ? `Dear ${name},` : "Welcome"}
+                  {name ? `Dear ${name},` : 'Welcome'}
                 </p>
                 {!isOpen ? (
                   <button
@@ -229,7 +229,7 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
                 {/* Text content */}
                 <div
                   ref={slide1Ref}
-                  className={`absolute bottom-12 left-8 right-8 z-20 ${isSlide1InView ? "active" : ""} fadeInMove`}
+                  className={`absolute bottom-12 left-8 right-8 z-20 ${isSlide1InView ? 'active' : ''} fadeInMove`}
                 >
                   <h1 className="text-2xl md:text-2xl font-ovo tracking-wide text-white uppercase">
                     {config.bibleVerse}
@@ -257,7 +257,7 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
                 <div className="absolute inset-0 bg-black/40 z-20" />
                 <div
                   ref={slide2Ref}
-                  className={`relative z-30 text-right ml-auto bg-black/10 rounded-xl p-5 ${isSlide2InView ? "active" : ""} fadeInMove`}
+                  className={`relative z-30 text-right ml-auto bg-black/10 rounded-xl p-5 ${isSlide2InView ? 'active' : ''} fadeInMove`}
                 >
                   <p className="font-legan text-lg my-2">The Groom</p>
                   <h1 className="text-3xl md:text-5xl text-white font-ovo">
@@ -289,7 +289,7 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
                 <div className="absolute inset-0 bg-black/40 z-20" />
                 <div
                   ref={slide3Ref}
-                  className={`relative z-30 fadeInMove bg-black/10 rounded-xl p-5 ${isSlide3InView ? "active" : ""}  `}
+                  className={`relative z-30 fadeInMove bg-black/10 rounded-xl p-5 ${isSlide3InView ? 'active' : ''}  `}
                 >
                   <p className="font-legan text-lg my-2">The Bride</p>
                   <h1 className="text-3xl md:text-5xl text-white  font-ovo">
@@ -324,21 +324,21 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
                 <div
                   ref={slide5Ref}
                   className={`absolute top-0 left-0 right-0 z-30 flex items-center flex-col pt-32 ${
-                    isSlide5InView ? "active" : ""
+                    isSlide5InView ? 'active' : ''
                   } fadeInMove`}
                 >
                   <h3 className="uppercase font-legan text-2xl tracking-wide mt-5 mb-2">
                     save our date
                   </h3>
                   <h1 className="text-4xl w-[250px] text-center text-white  font-ovo uppercase">
-                    {new Date(config.eventDate).toLocaleDateString("en-US", {
-                      weekday: "long",
-                    })}{" "}
-                    <br />{" "}
-                    {new Date(config.eventDate).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
+                    {new Date(config.eventDate).toLocaleDateString('en-US', {
+                      weekday: 'long',
+                    })}{' '}
+                    <br />{' '}
+                    {new Date(config.eventDate).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
                     })}
                   </h1>
                 </div>
@@ -346,7 +346,7 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
                 <div
                   ref={slide5Ref}
                   className={`absolute bottom-0 left-0 right-0 z-30 flex items-center flex-col pb-12 ${
-                    isSlide5InView ? "active" : ""
+                    isSlide5InView ? 'active' : ''
                   } fadeInMove`}
                 >
                   <h1 className="text-2xl text-center text-white  font-ovo">
@@ -381,7 +381,7 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
                         {config.holyMatrimony.place}
                       </p>
                       <p className="text-xl text-center font-legan text-white">
-                        {config.holyMatrimony.place2} <br />{" "}
+                        {config.holyMatrimony.place2} <br />{' '}
                         {config.holyMatrimony.place_details}
                       </p>
                       <Link
@@ -399,33 +399,38 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
               <div className="snap-start text-white h-screen relative overflow-hidden">
                 {/* Dark overlay */}
                 <div className="absolute inset-0 bg-black/40 z-10" />
-                {/* OUR GALLERY title */}
-                <div className="absolute top-14 left-0 right-0 z-30 flex flex-col items-center">
-                  <h3 className="font-legan text-2xl uppercase tracking-widest text-white/70">
-                    Our
-                  </h3>
-                  <h1 className="font-ovo text-4xl uppercase tracking-wide text-white">
-                    Gallery
-                  </h1>
-                </div>
-                {/* Photo grid */}
-                <div className="absolute top-40 left-10 right-10 bottom-16 z-20 grid grid-cols-2 grid-rows-3 gap-1">
-                  {[
-                    "/slide_1.jpg",
-                    "/photo-2.jpeg",
-                    "/photo-3.jpeg",
-                    "/photo-4.jpeg",
-                    "/slide_5.jpg",
-                    "/slide_6.jpg",
-                  ].map((src) => (
-                    <img
-                      key={src}
-                      src={src}
-                      alt=""
-                      className="w-full h-full object-cover cursor-pointer"
-                      onClick={() => setLightboxSrc(src)}
-                    />
-                  ))}
+
+                {/* Content */}
+                <div className="relative z-20 h-full flex flex-col justify-center px-10">
+                  {/* OUR GALLERY title */}
+                  <div className="flex flex-col items-center mb-8">
+                    <h3 className="font-legan text-2xl uppercase tracking-widest text-white/70">
+                      Our
+                    </h3>
+                    <h1 className="font-ovo text-4xl uppercase tracking-wide text-white">
+                      Gallery
+                    </h1>
+                  </div>
+
+                  {/* Photo grid */}
+                  <div className="grid grid-cols-2 grid-rows-3 gap-1 h-[55vh]">
+                    {[
+                      '/slide_1.jpg',
+                      '/photo-2.jpeg',
+                      '/photo-3.jpeg',
+                      '/photo-4.jpeg',
+                      '/slide_5.jpg',
+                      '/slide_6.jpg',
+                    ].map((src) => (
+                      <img
+                        key={src}
+                        src={src}
+                        alt=""
+                        className="w-full h-full object-cover cursor-pointer"
+                        onClick={() => setLightboxSrc(src)}
+                      />
+                    ))}
+                  </div>
                 </div>
 
                 {/* Lightbox */}
@@ -463,7 +468,7 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
                   <div className="absolute inset-0 bg-black/40 z-20" />
                   <div
                     ref={slide9Ref}
-                    className={`relative z-30 ${isSlide9InView ? "active" : ""} fadeInMove`}
+                    className={`relative z-30 ${isSlide9InView ? 'active' : ''} fadeInMove`}
                   >
                     <h1 className="text-3xl text-white font-ovo text-center uppercase">
                       RSVP AND WISHES
@@ -489,7 +494,7 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
                 <div className="absolute inset-0 bg-black/40 z-20" />
                 <div
                   ref={slide10Ref}
-                  className={`relative z-30 ${isSlide10InView ? "active" : ""} fadeInMove`}
+                  className={`relative z-30 ${isSlide10InView ? 'active' : ''} fadeInMove`}
                 >
                   <h1 className="text-3xl text-white font-ovo text-center uppercase">
                     Wishes
@@ -510,7 +515,7 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
                 <div className="absolute inset-0 bg-black/40 z-20" />
                 <div
                   ref={endRef}
-                  className={`relative z-30 bg-black/10 rounded-xl p-5 ${isEndInView ? "active" : ""} fadeInMove `}
+                  className={`relative z-30 bg-black/10 rounded-xl p-5 ${isEndInView ? 'active' : ''} fadeInMove `}
                 >
                   <h1 className="text-3xl text-white  font-ovo text-center uppercase">
                     {config.thankyou}
