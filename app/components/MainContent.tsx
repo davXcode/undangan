@@ -12,14 +12,12 @@ import { config } from '@/lib/config';
 
 type WeddingScreenProps = {
   name?: string;
-  autoPlayMusic?: boolean;
 };
 
-const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
+const WeddingScreen = ({ name }: WeddingScreenProps) => {
   const [fadeClass, setFadeClass] = useState('opacity-0');
   const [isOpen, setIsOpen] = useState(false);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
-  const audioRef = useRef<HTMLAudioElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Untuk fade-in pertama kali
@@ -30,12 +28,6 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
 
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    if (autoPlayMusic) {
-      audioRef.current?.play().catch(() => {});
-    }
-  }, [autoPlayMusic]);
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -542,8 +534,6 @@ const WeddingScreen = ({ name, autoPlayMusic }: WeddingScreenProps) => {
           )}
         </div>
       </div>
-      {/* Audio Element */}
-      <audio ref={audioRef} src="/music/wedding.mp3" preload="auto" />
     </div>
   );
 };
