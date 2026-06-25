@@ -102,6 +102,39 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
     }
   }, [isSlideVideoInView]);
 
+  const downloadCalendar = () => {
+    const startDate = new Date(config.eventDate);
+
+    const formatDate = (date: Date) =>
+      date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+    const icsContent = `
+BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:Wedding Event Fikri & Intan
+DTSTART:${formatDate(startDate)}
+DTEND:${formatDate(new Date(startDate.getTime() + 3 * 60 * 60 * 1000))}
+DESCRIPTION:We look forward to celebrating with you.
+LOCATION:
+END:VEVENT
+END:VCALENDAR
+`;
+
+    const blob = new Blob([icsContent], {
+      type: 'text/calendar;charset=utf-8',
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'save-the-date.ics';
+    link.click();
+
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div
       className={`h-screen w-screen flex flex-col md:flex-row ${fadeClass} transition-opacity duration-1000`}
@@ -322,22 +355,30 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                   <h3 className="uppercase font-legan text-2xl tracking-wide mt-5 mb-2">
                     save our date
                   </h3>
-                  <h1 className="text-4xl w-[250px] text-center text-white  font-ovo uppercase">
-                    {new Date(config.eventDate).toLocaleDateString('en-US', {
-                      weekday: 'long',
-                    })}{' '}
-                    <br />{' '}
-                    {new Date(config.eventDate).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </h1>
+                  <button
+                    onClick={downloadCalendar}
+                    className="cursor-pointer hover:scale-105 transition-transform"
+                  >
+                    <h1 className="text-4xl w-[250px] text-center text-white font-ovo uppercase">
+                      {new Date(config.eventDate).toLocaleDateString('en-US', {
+                        weekday: 'long',
+                      })}
+                      <br />
+                      {new Date(config.eventDate).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </h1>
+                    <p className="text-xs mt-2 uppercase tracking-wider">
+                      Tap to save
+                    </p>
+                  </button>
                 </div>
                 {/* Bottom content - countdown */}
                 <div
                   ref={slide5Ref}
-                  className={`absolute bottom-0 left-0 right-0 z-30 flex items-center flex-col pb-12 ${
+                  className={`absolute bottom-10 left-0 right-0 z-30 flex items-center flex-col pb-12 ${
                     isSlide5InView ? 'active' : ''
                   } fadeInMove`}
                 >
@@ -524,10 +565,14 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 </div>
 
                 <footer className="relative z-30 flex flex-col items-center mt-8">
-                  {/* <p className="text-[0.5rem] uppercase text-center">
-                    Created By D
-                  </p> */}
-                  <p className="text-xs">© All rights reserved by D</p>
+                  <a
+                    href="https://www.instagram.com/yangmuliadavid"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs hover:underline transition"
+                  >
+                    Created By David
+                  </a>
                 </footer>
               </div>
             </>
