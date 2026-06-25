@@ -268,6 +268,40 @@ END:VCALENDAR
                 </div>
               </div>
               {/* Slide 2 */}
+
+              <div className="snap-start text-white h-screen flex items-end pb-16 px-12 relative overflow-hidden">
+                {/* Photo with inset on all sides */}
+                <div className="absolute inset-x-5 inset-y-[20%] z-10">
+                  <img
+                    src="/slide_3.jpg"
+                    alt="Wedding photo"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                {/* Dark overlay */}
+                <div className="absolute inset-0 bg-black/40 z-20" />
+                <div
+                  ref={slide3Ref}
+                  className={`relative z-30 fadeInMove bg-black/10 rounded-xl p-5 ${isSlide3InView ? 'active' : ''}  `}
+                >
+                  <p className="font-legan text-lg my-2">The Bride</p>
+                  <h1 className="text-3xl md:text-5xl text-white  font-ovo">
+                    {config.bride}
+                  </h1>
+                  <p className="text-lg mt-5 font-legan text-[#CCCCCC]">
+                    {config.brideBio}
+                  </p>
+                  {/* <Link
+                    href={`https://www.instagram.com/${config.brideInstagram}`}
+                    target="_blank"
+                    className="cursor-pointer hover:bg-black text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#4E4E4E] w-fit px-4 py-2 text-[#CCCCCC]"
+                  >
+                    <FaInstagram /> {config.brideInstagram}
+                  </Link> */}
+                </div>
+              </div>
+
+              {/* Slide 3 */}
               <div className="snap-start text-white h-screen flex items-end pb-16 px-12 relative overflow-hidden">
                 {/* Photo centered with inset on all sides */}
                 <div className="absolute inset-x-5 inset-y-[20%] z-10">
@@ -297,38 +331,6 @@ END:VCALENDAR
                     className="cursor-pointer hover:bg-black text-sm rounded-full flex items-center justify-end gap-x-2 text-center font-legan mt-5 bg-[#4E4E4E] w-fit px-4 py-2 text-[#CCCCCC] ml-auto"
                   >
                     <FaInstagram /> {config.groomInstagram}
-                  </Link> */}
-                </div>
-              </div>
-              {/* Slide 3 */}
-              <div className="snap-start text-white h-screen flex items-end pb-16 px-12 relative overflow-hidden">
-                {/* Photo with inset on all sides */}
-                <div className="absolute inset-x-5 inset-y-[20%] z-10">
-                  <img
-                    src="/slide_3.jpg"
-                    alt="Wedding photo"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                {/* Dark overlay */}
-                <div className="absolute inset-0 bg-black/40 z-20" />
-                <div
-                  ref={slide3Ref}
-                  className={`relative z-30 fadeInMove bg-black/10 rounded-xl p-5 ${isSlide3InView ? 'active' : ''}  `}
-                >
-                  <p className="font-legan text-lg my-2">The Bride</p>
-                  <h1 className="text-3xl md:text-5xl text-white  font-ovo">
-                    {config.bride}
-                  </h1>
-                  <p className="text-lg mt-5 font-legan text-[#CCCCCC]">
-                    {config.brideBio}
-                  </p>
-                  {/* <Link
-                    href={`https://www.instagram.com/${config.brideInstagram}`}
-                    target="_blank"
-                    className="cursor-pointer hover:bg-black text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#4E4E4E] w-fit px-4 py-2 text-[#CCCCCC]"
-                  >
-                    <FaInstagram /> {config.brideInstagram}
                   </Link> */}
                 </div>
               </div>
