@@ -370,9 +370,15 @@ END:VCALENDAR
                         day: 'numeric',
                       })}
                     </h1>
-                    <p className="text-xs mt-2 uppercase tracking-wider">
+                    {/* <p className="text-xs mt-2 uppercase tracking-wider">
                       Tap to save
-                    </p>
+                    </p> */}
+                  </button>
+                  <button
+                    className=" mt-5 px-5 py-1 uppercase text-xs border border-white hover:text-white hover:bg-transparent rounded-full bg-white text-black transition"
+                    onClick={downloadCalendar}
+                  >
+                    Tap to save
                   </button>
                 </div>
                 {/* Bottom content - countdown */}
