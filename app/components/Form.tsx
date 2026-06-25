@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Form = () => {
   const [loading, setLoading] = useState(false);
@@ -15,22 +15,22 @@ const Form = () => {
 
     const formData = new FormData(e.currentTarget);
     const data = {
-      name: formData.get("name"),
-      attendance: formData.get("attendance"),
-      guests: formData.get("guests"),
-      message: formData.get("message"),
+      name: formData.get('name'),
+      attendance: formData.get('attendance'),
+      guests: formData.get('guests'),
+      message: formData.get('message'),
     };
 
     if (!data.name || !data.attendance || !data.guests || !data.message) {
-      alert("All fields are required!");
+      alert('All fields are required!');
       setLoading(false);
       return;
     }
 
-    const response = await fetch("/api/submit", {
-      method: "POST",
+    const response = await fetch('/api/submit', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });
@@ -38,9 +38,9 @@ const Form = () => {
     if (response.ok) {
       // Reset the form if submission is successful
       form.reset();
-      alert("RSVP submitted successfully!");
+      alert('RSVP submitted successfully!');
     } else {
-      alert("Failed to submit RSVP");
+      alert('Failed to submit RSVP');
     }
 
     setLoading(false); // Set loading to false after response
@@ -107,7 +107,7 @@ const Form = () => {
           htmlFor="message"
           className="block text-sm font-medium text-white"
         >
-          Ucapan
+          Ucapan dan Doa
         </label>
         <textarea
           id="message"
@@ -124,7 +124,7 @@ const Form = () => {
           className="block w-full p-2 text-sm font-medium text-center text-black bg-white border border-transparent rounded-md shadow-sm"
           disabled={loading}
         >
-          {loading ? "Submitting..." : "Submit"}
+          {loading ? 'Submitting...' : 'Submit'}
         </button>
       </div>
     </form>

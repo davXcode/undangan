@@ -112,7 +112,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
 BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
-SUMMARY:Wedding Event Fikri & Intan
+SUMMARY:Wedding Event Intan & Fikri
 DTSTART:${formatDate(startDate)}
 DTEND:${formatDate(new Date(startDate.getTime() + 3 * 60 * 60 * 1000))}
 DESCRIPTION:We look forward to celebrating with you.
@@ -291,13 +291,13 @@ END:VCALENDAR
                   <p className="text-lg mt-5 font-legan text-[#CCCCCC]">
                     {config.groomBio}
                   </p>
-                  <Link
+                  {/* <Link
                     href={`https://www.instagram.com/${config.groomInstagram}`}
                     target="_blank"
                     className="cursor-pointer hover:bg-black text-sm rounded-full flex items-center justify-end gap-x-2 text-center font-legan mt-5 bg-[#4E4E4E] w-fit px-4 py-2 text-[#CCCCCC] ml-auto"
                   >
                     <FaInstagram /> {config.groomInstagram}
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
               {/* Slide 3 */}
@@ -323,13 +323,13 @@ END:VCALENDAR
                   <p className="text-lg mt-5 font-legan text-[#CCCCCC]">
                     {config.brideBio}
                   </p>
-                  <Link
+                  {/* <Link
                     href={`https://www.instagram.com/${config.brideInstagram}`}
                     target="_blank"
                     className="cursor-pointer hover:bg-black text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#4E4E4E] w-fit px-4 py-2 text-[#CCCCCC]"
                   >
                     <FaInstagram /> {config.brideInstagram}
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
 
@@ -370,6 +370,9 @@ END:VCALENDAR
                         day: 'numeric',
                       })}
                     </h1>
+                    <h3 className="uppercase font-legan text-4xl text-center mb-1">
+                      {config.holyMatrimony.time}
+                    </h3>
                     {/* <p className="text-xs mt-2 uppercase tracking-wider">
                       Tap to save
                     </p> */}
@@ -406,9 +409,9 @@ END:VCALENDAR
                       <h3 className="uppercase font-ovo text-3xl text-center mt-2">
                         Walimatul `Ursy
                       </h3>
-                      <h3 className="uppercase font-legan text-4xl text-center mb-1">
+                      {/* <h3 className="uppercase font-legan text-4xl text-center mb-1">
                         {config.holyMatrimony.time}
-                      </h3>
+                      </h3> */}
 
                       <img
                         src="/majt.jpg"
