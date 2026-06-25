@@ -362,9 +362,7 @@ END:VCALENDAR
                     <h3 className="uppercase font-ovo text-3xl text-center mt-2">
                       Walimatul `Ursy
                     </h3>
-                    <h3 className="uppercase font-legan text-4xl text-center mb-1">
-                      {config.holyMatrimony.time}
-                    </h3>
+
                     <h1 className="text-4xl w-[250px] text-center text-white font-ovo uppercase">
                       {new Date(config.eventDate).toLocaleDateString('en-US', {
                         weekday: 'long',
@@ -376,6 +374,9 @@ END:VCALENDAR
                         day: 'numeric',
                       })}
                     </h1>
+                    <h3 className="uppercase font-legan text-4xl text-center mb-1">
+                      {config.holyMatrimony.time}
+                    </h3>
 
                     {/* <p className="text-xs mt-2 uppercase tracking-wider">
                       Tap to save
