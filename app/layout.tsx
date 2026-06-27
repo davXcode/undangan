@@ -28,15 +28,21 @@ const ovo = Ovo({
   variable: '--font-ovo',
 });
 
+const eventDate = new Date(config.eventDate).toLocaleDateString('en-US', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://fikriintan.vercel.app/';
 
 export const metadata: Metadata = {
   title: `The Wedding of ${config.coupleNames}`,
-  description: `${config.eventDate} Wedding Invitation of ${config.coupleNames}`,
+  description: `${eventDate} • Wedding Invitation of ${config.coupleNames}`,
   openGraph: {
     title: `The Wedding of ${config.coupleNames}`,
-    description: `${config.eventDate} Wedding Invitation of ${config.coupleNames}`,
+    description: `${eventDate} • Wedding Invitation of ${config.coupleNames}`,
     url: siteUrl,
     siteName: `The Wedding of ${config.coupleNames}`,
     images: [
@@ -54,7 +60,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `The Wedding of ${config.coupleNames}`,
-    description: `${config.eventDate} Wedding Invitation of ${config.coupleNames}`,
+    description: `${eventDate} • Wedding Invitation of ${config.coupleNames}`,
     images: [`${siteUrl}/slide_7.jpg`],
   },
 };
